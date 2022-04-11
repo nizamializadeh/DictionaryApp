@@ -20,6 +20,7 @@ class DictionaryCubit extends Cubit<DictionaryState> {
           await _repository.getWordsFromDictionary(queryController.text);
 
       if (words == null) {
+         btnColorMap['${queryController.text}'] = Colors.orange;
         emit(ErrorState("There is some problem"));
       } else {
         btnColorMap['${queryController.text}'] = Colors.grey;
@@ -28,7 +29,7 @@ class DictionaryCubit extends Cubit<DictionaryState> {
         emit(NoWordSearchedState());
       }
     } on Exception catch (e) {
-      btnColorMap['${queryController.text}'] = Colors.grey;
+      btnColorMap['${queryController.text}'] = Colors.orange;
       print(e);
       emit(ErrorState(e.toString()));
     }
